@@ -24,6 +24,13 @@ print("Checking directory...")
 print(f"Current directory: {os.getcwd()}")
 print()
 
+# check login via token
+print("Checking login profile...")
+if check_token():
+    print("Token Available. Proceed to login")
+else:
+    print("No token available")
+
 # menu function
 # from function import *
 
@@ -31,11 +38,4 @@ print()
 dev = True
 
 # Main Menu
-while True:
-    print("--Main menu--")
-    print(f"Hi! {getpass.getuser()}. What you want to do?")
-    print("1.Fetch Video Data")
-    print("2.Download Video Thumbnail")
-    print("3.Download Video as mp4")
-    print("0.exit")
-    menu = input("Press number from menu to continue : ")
+# while True:

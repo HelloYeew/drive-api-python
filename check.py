@@ -1,6 +1,7 @@
 import subprocess
 import sys
 import urllib.request
+import os
 
 def check_library():
     print("Start checking important library to run a program...")
@@ -42,8 +43,8 @@ def check_library():
     finally:
         import oauth2client
 
-
     print("Checking complete!")
+
 
 def check_internet(url='http://www.google.com', timeout=3):
     try:
@@ -52,3 +53,11 @@ def check_internet(url='http://www.google.com', timeout=3):
     except Exception as e:
         print(e)
         return False
+
+
+def check_token():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    for root, dirs, files in os.walk(dir_path):
+        for file in files:
+            if file.endswith('.pickle'):
+                return True
