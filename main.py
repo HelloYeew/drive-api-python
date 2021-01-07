@@ -25,17 +25,34 @@ print(f"Current directory: {os.getcwd()}")
 print()
 
 # check login via token
-print("Checking login profile...")
-if check_token():
-    print("Token Available. Proceed to login")
-else:
-    print("No token available")
+# print("Checking login profile...")
+# if check_token():
+#     print("Token Available. Proceed to login")
+# else:
+#     print("No token available")
 
 # menu function
-# from function import *
+from function import *
+from all_apps import *
+from drive_function import *
+from drive_auth import *
 
 # turn on and turn off dev mode here
 dev = True
 
 # Main Menu
-# while True:
+while True:
+    all_apps()
+    num = input("Put a number to access (Exit press 0) : ")
+    if num.isnumeric:
+        num = int(num)
+        print()
+        if num == 1:
+            drive_main()
+        if num == 0:
+            break
+    else:
+        print("Invalid input!")
+
+
+
