@@ -34,8 +34,7 @@ print()
 # menu function
 from function import *
 from all_apps import *
-from drive_function import *
-from drive_auth import *
+from drive_menu import *
 
 # turn on and turn off dev mode here
 dev = True
@@ -48,7 +47,7 @@ while True:
         num = int(num)
         print()
         if num == 1:
-            drive_main()
+            drive_main_menu()
         if num == 0:
             break
     else:

@@ -1,20 +1,5 @@
-from drive_auth import *
+from googleapiclient.http import MediaFileUpload
 
-def drive_main():
-    print("Authenticate...")
-    service = drive_auth_v3(["https://www.googleapis.com/auth/drive"])
-    while True:
-        print("Authentication complete.")
-        print("--Drive Main Menu--")
-        print("1.Try")
-        print("0.Return to main menu")
-        menu = input("Input a number to continue : ")
-        if menu.isnumeric():
-            menu = int(menu)
-            if menu == 1:
-                get_information(service)
-            elif menu == 0:
-                break
 
 def get_information(api):
     # Call the Drive v3 API
@@ -29,3 +14,29 @@ def get_information(api):
         for item in items:
             print(u'{0} ({1})'.format(item['name'], item['id']))
     print()
+
+
+def create_folder_and_upload(api):
+    # Ask Required Information
+    name = input("Folder Name : ")
+    file_name = input("File name (with .jpg) :")
+
+    # Create Folder
+    file_metadata = {
+        'title': name,
+        'mimeType': 'application/vnd.google-apps.folder'
+    }
+    file = api.files().insert(body=file_metadata, fields='id').execute()
+    print('Folder ID: %s' % file.get('id'))
+
+    # Upload Files
+    folder_id = file.get('id')
+    file_metadata = {
+        'title': file_name,
+        'parents': [{'id': folder_id}]
+    }
+    media = MediaFileUpload('files/photo.jpg',
+                            mimetype='image/jpeg',
+                            resumable=True)
+    file = api.files().insert(body=file_metadata, media_body=media, fields='id').execute()
+    print('File ID: %s' % file.get('id'))

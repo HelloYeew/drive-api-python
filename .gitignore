@@ -133,3 +133,4 @@ client_secret.json
 token.pickle
 /.idea
 try.py
+.DS_Store
